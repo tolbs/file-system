@@ -21,7 +21,7 @@
 #include "b_io.h"
 
 #define MAXFCBS 20
-#define BUFSIZE 512
+uint64_t bufSize;
 
 typedef struct b_fcb
 {
@@ -69,7 +69,7 @@ int b_open (char * filename, int flags)
 	int fd;
 	int returnFd;
 	
-	//*** TODO ***:  Modify to save or set any information needed
+	
 	//
 	//
 	
@@ -122,9 +122,7 @@ int b_write (int fd, char * buffer, int count)
 		return -1;
 		}	
 		
-	//*** TODO ***:  Write buffered write function to accept the data and # bytes provided
-	//               You must use the Linux System Calls and you must buffer the data
-	//				 in 512 byte chunks and only write in 512 byte blocks.
+	
 	
 	int providedCount=count;	//	making a copy of count(no. of bytes in the buffer, provided)
 	int returnValue=-1;			//	initializing the returnValue as -1
@@ -161,8 +159,7 @@ int b_write (int fd, char * buffer, int count)
 			//update the length of the file buffer , by the difference no. of bytes
 			fcbArray[fd].buflen+=difference;
 			
-			//if the length of the file buffer has become equals to the required buffer
-			//size (BUFSIZE or 512 bytes) , than write it onto the file and reset all the parameters
+			
 			if(fcbArray[fd].buflen>=BUFSIZE){
 				
 				//writing BUFSIZE no. of bytes from the buffer onto the file
