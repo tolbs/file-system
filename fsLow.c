@@ -69,7 +69,11 @@ int initializePartition (int fd, uint64_t volSize, uint64_t blockSize)
 	
 	if (buf == NULL)
 		{
+<<<<<<< HEAD
 		exit(EXIT_FAILURE); //abort
+=======
+		//abort
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		}
 	
 	strcpy(buf->volumePrefix, PART_CAPTION);
@@ -85,7 +89,11 @@ int initializePartition (int fd, uint64_t volSize, uint64_t blockSize)
 	
 	if (writeRet != blockSize)
 		{
+<<<<<<< HEAD
 		return -1;//process error
+=======
+		//process error
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		}
 	
 	fsync(fd);
@@ -280,12 +288,23 @@ uint64_t LBAread (void * buffer, uint64_t lbaCount, uint64_t lbaPosition)
 	fcntl(partInfop->fd, F_SETLKW, &fl);
 
 	lseek (partInfop->fd, fl.l_start, SEEK_SET);
+<<<<<<< HEAD
 	//uint64_t retRead = read(partInfop->fd, buffer, fl.l_len);
 	//read(partInfop->fd, buffer, fl.l_len)
+=======
+	read(partInfop->fd, buffer, fl.l_len);
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 
 	fl.l_type = F_UNLCK;
 	fcntl(partInfop->fd, F_SETLKW, &fl);
 	
+<<<<<<< HEAD
 	//return 0;
 	return read(partInfop->fd, buffer, fl.l_len) / partInfop->blocksize;
 	}
+=======
+	return 0;
+	}
+
+
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac

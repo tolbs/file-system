@@ -34,6 +34,7 @@
 	
 	#include <sys/stat.h>
 	#include <dirent.h>
+<<<<<<< HEAD
 	#define mfs_mkdir	mkdir
 	#define mfs_getcwd	getcwd
 	#define mfs_setcwd	chdir
@@ -49,23 +50,59 @@
 		}
 		
 	struct mfs_dirent *mfs_readdir(mfs_DIR *dirp)
+=======
+	#define fs_mkdir	mkdir
+	#define fs_getcwd	getcwd
+	#define fs_setcwd	chdir
+	#define fs_rmdir	rmdir
+	#define fs_delete unlink
+	
+	
+	fdDir * fs_opendir(const char *name)
+		{
+		DIR * dir;
+		dir = opendir(name);
+		return ((fdDir *) dir);
+		}
+	
+	struct fs_diriteminfo fsDi;	
+	struct fs_diriteminfo *fs_readdir(fdDir *dirp)
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		{
 		DIR *dir;
 		dir = (DIR *) dirp;
 		struct dirent * de;
 		de = readdir (dir);
+<<<<<<< HEAD
 		
 		return ((struct mfs_dirent *)de);
 		}
 		
 	int mfs_closedir(mfs_DIR *dirp)
+=======
+		if (de == NULL)
+			return (NULL);
+			
+			
+		fsDi.d_reclen = (unsigned short) sizeof (fsDe);
+		fsDi.fileType = de->d_type;
+		strcpy(fsDi.d_name, de->d_name);
+		return (&fsDi);
+		}
+		
+	int fs_closedir(fs_DIR *dirp)
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		{
 		DIR *dir;
 		dir = (DIR *) dirp;
 		return (closedir (dir));
 		}
 
+<<<<<<< HEAD
 	int mfs_stat(const char *path, struct mfs_stat *buf)
+=======
+	int fs_stat(const char *path, struct fs_stat *buf)
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		{
 		struct stat * path_stat;
 		path_stat = (struct stat *) buf;
@@ -73,14 +110,22 @@
 		}
 
 	
+<<<<<<< HEAD
 	int mfs_isFile (char * path)
+=======
+	int fs_isFile (char * path)
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		{
 		struct stat path_stat;
 		stat(path, &path_stat);
 		return S_ISREG(path_stat.st_mode);
 		}
 	
+<<<<<<< HEAD
 	int mfs_isDir (char * path)
+=======
+	int fs_isDir (char * path)
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		{
 		struct stat path_stat;
 		if (stat(path, &path_stat) != 0)
@@ -147,11 +192,16 @@ dispatch_t dispatchTable[] = {
 static int dispatchcount = sizeof (dispatchTable) / sizeof (dispatch_t);
 
 // Display files for use by ls command
+<<<<<<< HEAD
 int displayFiles (mfs_DIR * dirp, int flall, int fllong)
+=======
+int displayFiles (fdDir * dirp, int flall, int fllong)
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 	{
 	if (dirp == NULL)	//get out if error
 		return (-1);
 	
+<<<<<<< HEAD
 	struct mfs_dirent * de;
 	struct mfs_stat statbuf;
 	
@@ -174,6 +224,30 @@ int displayFiles (mfs_DIR * dirp, int flall, int fllong)
 		de = mfs_readdir (dirp);
 		}
 	mfs_closedir (dirp);
+=======
+	struct fs_diriteminfo * di;
+	struct fs_stat statbuf;
+	
+	di = fs_readdir (dirp);
+	printf("\n");
+	while (di != NULL) 
+		{
+		if ((di->d_name[0] != '.') || (flall)) //if not all and starts with '.' it is hidden
+			{
+			if (fllong)
+				{
+				fs_stat (di->d_name, &statbuf);
+				printf ("%s    %9ld   %s\n", fs_isDir(di->d_name)?"D":"-", statbuf.st_size, di->d_name);
+				}
+			else
+				{
+				printf ("%s\n", di->d_name);
+				}
+			}
+		di = fs_readdir (dirp);
+		}
+	fs_closedir (dirp);
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 	return 0;
 	}
 	
@@ -254,15 +328,26 @@ int cmd_ls (int argcnt, char *argvec[])
 		//processing arguments after options
 		for (int k = optind; k < argcnt; k++)
 			{
+<<<<<<< HEAD
 			if (mfs_isDir(argvec[k]))
 				{
 				mfs_DIR * dirp;
 				dirp = mfs_opendir (argvec[k]);
+=======
+			if (fs_isDir(argvec[k]))
+				{
+				fdDir * dirp;
+				dirp = fs_opendir (argvec[k]);
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 				displayFiles (dirp, flall, fllong);
 				}
 			else // it is just a file ?
 				{
+<<<<<<< HEAD
 				if (mfs_isFile (argvec[k]))
+=======
+				if (fs_isFile (argvec[k]))
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 					{
 					//no support for long format here
 					printf ("%s\n", argvec[k]);
@@ -276,9 +361,15 @@ int cmd_ls (int argcnt, char *argvec[])
 		}
 	else   // no pathname/filename specified - use cwd
 		{
+<<<<<<< HEAD
 		char * path = mfs_getcwd(cwd, DIRMAX_LEN);	//get current working directory
 		mfs_DIR * dirp;
 		dirp = mfs_opendir (path);
+=======
+		char * path = fs_getcwd(cwd, DIRMAX_LEN);	//get current working directory
+		fdDir * dirp;
+		dirp = fs_opendir (path);
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		return (displayFiles (dirp, flall, fllong));
 		}
 	return 0;
@@ -356,7 +447,11 @@ int cmd_md (int argcnt, char *argvec[])
 		}
 	else
 		{
+<<<<<<< HEAD
 		return(mfs_mkdir(argvec[1], 0777));
+=======
+		return(fs_mkdir(argvec[1], 0777));
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		}
 #endif
 	}
@@ -376,6 +471,7 @@ int cmd_rm (int argcnt, char *argvec[])
 	char * path = argvec[1];	
 	
 	//must determine if file or directory
+<<<<<<< HEAD
 	if (mfs_isDir (path))
 		{
 		return (mfs_rmdir (path));
@@ -383,6 +479,15 @@ int cmd_rm (int argcnt, char *argvec[])
 	if (mfs_isFile (path))
 		{
 		return (mfs_delete(path));
+=======
+	if (fs_isDir (path))
+		{
+		return (fs_rmdir (path));
+		}		
+	if (fs_isFile (path))
+		{
+		return (fs_delete(path));
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		}	
 		
 	printf("The path %s is neither a file not a directory\n", path);
@@ -422,10 +527,17 @@ int cmd_cp2l (int argcnt, char *argvec[])
 	
 	
 	testfs_fd = b_open (src, O_RDONLY);
+<<<<<<< HEAD
 	linux_fd = open (dest, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	do 
 		{
 		readcnt = readcnt = b_read (testfs_fd, buf, BUFFERLEN);
+=======
+	linux_fd = open (dest, O_WRONLY | O_CREAT | O_TRUNC);
+	do 
+		{
+		readcnt = b_read (testfs_fd, buf, BUFFERLEN);
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		write (linux_fd, buf, readcnt);
 		} while (readcnt == BUFFERLEN);
 	b_close (testfs_fd);
@@ -470,7 +582,10 @@ int cmd_cp2fs (int argcnt, char *argvec[])
 	do 
 		{
 		readcnt = read (linux_fd, buf, BUFFERLEN);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 		b_write (testfs_fd, buf, readcnt);
 		} while (readcnt == BUFFERLEN);
 	b_close (testfs_fd);
@@ -501,7 +616,11 @@ int cmd_cd (int argcnt, char *argvec[])
 			path[strlen(path) - 1] = 0;
 			}
 		}
+<<<<<<< HEAD
 	int ret = mfs_setcwd (path);
+=======
+	int ret = fs_setcwd (path);
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 	if (ret != 0)	//error
 		{
 		printf ("Could not change path to %s\n", path);
@@ -519,7 +638,11 @@ int cmd_pwd (int argcnt, char *argvec[])
 #if (CMDPWD_ON == 1)
 	char * dir_buf = malloc (DIRMAX_LEN +1);
 	char * ptr;	
+<<<<<<< HEAD
 	ptr = mfs_getcwd (dir_buf, DIRMAX_LEN);	
+=======
+	ptr = fs_getcwd (dir_buf, DIRMAX_LEN);	
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 	if (ptr == NULL)			//an error occurred
 		{
 		printf ("An error occurred while trying to get the current working directory\n");
@@ -665,7 +788,10 @@ void processcommand (char * cmd)
 		if (strcmp(dispatchTable[i].command, cmdv[0]) == 0)
 			{
 			dispatchTable[i].func(cmdc,cmdv);
+<<<<<<< HEAD
 			printf("End dispatch\n");
+=======
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 			free (cmdv);
 			cmdv = NULL;
 			return;
@@ -677,6 +803,7 @@ void processcommand (char * cmd)
 	cmdv = NULL;
 	}
 
+<<<<<<< HEAD
 void initializeFileSystem() {
 	openVolume("SampleVolume");
 	mfs_init();
@@ -686,6 +813,9 @@ void closeFileSystem() {
 	mfs_close();
 	closeVolume();
 }
+=======
+
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 
 int main (int argc, char * argv[])
 	{
@@ -695,8 +825,11 @@ int main (int argc, char * argv[])
 		
 	using_history();
 	stifle_history(200);	//max history entries
+<<<<<<< HEAD
 
 	initializeFileSystem();
+=======
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 	
 	while (1)
 		{
@@ -731,7 +864,10 @@ int main (int argc, char * argv[])
 		free (cmd);
 		cmd = NULL;		
 		} // end while
+<<<<<<< HEAD
 
 		closeFileSystem();
 
+=======
+>>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 	}
