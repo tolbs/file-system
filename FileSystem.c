@@ -59,7 +59,10 @@ void createFileSystem()
 void createFile(char *fileName, short fileSize, int fileMode, char *owner, char *data)
 {
 	long dirIndex = hash(fileName);
-	//NEED ERROR HANDLING/CONFLICT RESOLUTION HERE!!!!!!!!!!
+	/**
+	 * TODO: need error handling here- maybe copy from fslow.c
+	 **/
+
 	//printf("HASHED %d\n", dirIndex); //INDEX OF DIRECTORY HASH - TESTING
 	INODE dirEnt = dir[dirIndex];
 	long memIndex = findFreeIndex();
@@ -700,7 +703,7 @@ long findInSystemTable(char *fileName)
 	return -1;
 }
 
-
+//this doesn't make sense? vvvv
 int checkCanWrite(int fileMode)
 {
 	//switch the fileMode. Check if you can write to it. return 1 for yes, 0 for no.
@@ -718,7 +721,10 @@ void freeMemory(long indexOfFileDesc, short fileSize)
 		toDelete.type = 0;
 		toDelete.node.fDescription.fileName[0] = '\0';
 		freeBitVector(indexOfFileDesc);
-		//CALL BIT VECTOR FREEING HERE
+
+		/**
+		 * TODO: need to free bit vector here after function is implemented
+		 */
 	}
 	else if(toDelete.type == 2)
 	{
@@ -728,8 +734,11 @@ void freeMemory(long indexOfFileDesc, short fileSize)
 		{
 			freeBitVector(indexOfFileDesc);
 			freeMemory(toDelete.node.iNode.index[i], fileSize);
-			toDelete.type = 0;			
-			//CALL BIT VECTOR FREEING HERE
+			toDelete.type = 0;
+
+			/**
+		 	* TODO: need to free bit vector here after function is implemented
+		 	*/
 		}		
 	}
 
@@ -771,11 +780,9 @@ void getFileInfo(INODE *dirEnt)
 	printf("File Size: %d\n", dirEnt->fileContent.fileSize);
 	printf("Access Mode: %d\n", dirEnt->fileContent.fileMode);
 	printf("Owner: %s\n", dirEnt->fileContent.owner);
-	//printf("Creation Time: %ld\n", dirEnt->fileContent.creationTime);
 	printf("Index of file descriptor in memory: %ld\n", dirEnt->indexOfFile);
 	printf("Index of first iNode/Data: %ld\n", dirEnt->fileContent.indexOfNode);
 }
-
 
 
 //FINDFREEINDEX NEEDS TO BE THE BITVECTOR CHECKING
@@ -808,7 +815,7 @@ long findFreeIndex()
 }
 
 
-//found simple hash function online...
+//found hash function online...
 unsigned long hash(const char *s)
 {
     unsigned long h;
