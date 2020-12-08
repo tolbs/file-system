@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 	createFileSystem();
 	char *testString = "I am a test text file. ";
 	createFile("test.txt", strlen(testString), 600, "Tolby", testString);
-	createFile("test2.txt", 5, 700, "Tolby", "Hello");
+	createFile("test2.txt", 5, 700, "Kimberly", "Hello");
 	getDirectoryInfo();
 	int pid = 123;
 	int canOpen = openFile("test2.txt", pid);
@@ -27,12 +27,16 @@ int main(int argc, char const *argv[])
 	printf("Deleted = %d\n\n", deleted); 
 	char *fileThreeContent = "I am a third file to be put in memory";
 	int accessMode = 777;
-	createFile("test3.txt", strlen(fileThreeContent), 777, "Someone Else", fileThreeContent);
+	createFile("test3.txt", strlen(fileThreeContent), 777, "Angela", fileThreeContent);
+	createFile("test3.txt", strlen(fileThreeContent), 777, "Abishek", testString);
+
 	printf("\n\n[UPDATED DIRECTORY]\n\n");
 	getDirectoryInfo();
-	//deleted = deleteFile("test2.txt");
-	//printf("Deleted = %d\n", deleted);
-	//printf("%d\n", strlen(testString));
+	deleted = deleteFile("test2.txt");
+	printf("Deleted = %d\n", deleted);
+	printf("%d\n", strlen(testString));
+	printf("\n\n[UPDATED DIRECTORY]\n\n");
+	getDirectoryInfo();
 	return 0;
 }
 
