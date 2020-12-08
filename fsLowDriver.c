@@ -1,13 +1,14 @@
 /**************************************************************
-* Class:  CSC-415
-* Name: Professor Bierman
-* Student ID: N/A
-* Project: Basic File System
+* Class:  CSC-415-03 Fall 2020
+* Name: (KAAT) Kimberly Nivon, Angela Avina Garcia, Abishek Neralla, Tolby Lam
+* Student ID: 916563133(Kimberly), 917579109(Angela), 917725840(Abishek) 
+*		920787020(Tolby)
+* Project: File System Project
 *
 * File: fsLowDriver.c
 *
-* Description: This is a demo to show how to use the fsLow
-* 	routines.
+* Description: this is a demo to show how to use the fsLow
+*		routines
 *
 **************************************************************/
 
