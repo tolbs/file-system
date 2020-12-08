@@ -1,16 +1,16 @@
 /**************************************************************
-* Class:  CSC-415-02 Summer 2020
-* Name: Team Penta - Duy Nguyen, Taylor Artunian, Wameedh Mohammed Ali
-* Student ID: 917446249 (Duy), 920351715 (Taylor), 920678405 (Wameedh)
-* Project: Basic File System - PentaFS
+* Class:  CSC-415-03 Fall 2020
+* Name: (KAAT) Kimberly Nivon, Angela Avina Garcia, Abishek Neralla, Tolby Lam
+* Student ID: 916563133(Kimberly), 917579109(Angela), 917725840(Abishek) 
+*		920787020(Tolby)
+* Project: File System Project
 *
-* File: b_io.c
+* File: fsMakeVol.c
 *
-* Description: This program is used to create a volume for the
-*              Penta File System. It holds the free-space bit vector
-*		and the inodes on disk.
+* Description: this file includes our free space and inodes that will create our volume
 *
 **************************************************************/
+
 
 #include "fsMakeVol.h"
 
