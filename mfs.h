@@ -1,29 +1,17 @@
 /**************************************************************
-* Class:  CSC-415
-<<<<<<< HEAD
-* Name: Team Penta - Duy Nguyen, Taylor Artunian, Wameedh Mohammed Ali
-* Student ID: 917446249 (Duy), 920351715 (Taylor), 920678405 (Wameedh)
-* Project: Basic File System - PentaFS
+* Class:  CSC-415-03 Fall 2020
+* Name: (KAAT) Kimberly Nivon, Angela Avina Garcia, Abishek Neralla, Tolby Lam
+* Student ID: 916563133(Kimberly), 917579109(Angela), 917725840(Abishek) 
+*		920787020(Tolby)
+* Project: File System Project
 *
 * File: mfs.h
 *
-* Description: 
-*	This is the file system's method prototypes.
-*	These methods initialize, change and hold information pertaining to files and folders in our file system.
-=======
-* Name: Professor Bierman
-* Student ID: N/A
-* Project: Basic File System
-*
-* File: fsLow.h
-*
-* Description: 
-*	This is the file system interface.
-*	This is the interface needed by the driver to interact with
-*	your filesystem.
->>>>>>> 210e939a66d1a56f10106725c2569187591180ac
+* Description: file system interface; needed by the driver 
+* 		to interact with the filesystem
 *
 **************************************************************/
+
 #ifndef _MFS_H
 #define _MFS_H
 #include <sys/types.h>
