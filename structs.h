@@ -7,7 +7,6 @@ typedef struct FILEDESC
 	short fileSize;
 	int fileMode;
 	char owner[40];
-	//time_t creationTime;
 	long indexOfNode;
 } FILEDESC;
 
@@ -60,8 +59,7 @@ typedef struct SYSFILETABLE
 	FILEDESC openFiles[DIR_SIZE];
 	long numOpen;
 	long dataIndex[DIR_SIZE];
-	//maybe char fileNames[DIR_SIZE][40]; ?
-	//POINTER TO FD? POINTER TO FD INFORMATION. COPY IT OVER
+	//might need pointer to fd or fd info
 } SYSFILETABLE;
 
 typedef struct PROCFILETABLE
