@@ -1,15 +1,13 @@
 /**************************************************************
-* Class:  CSC-415
-* Name: Professor Bierman
-* Student ID: N/A
-* Project: Basic File System
+* Class:  CSC-415-03 Fall 2020
+* Name: (KAAT) Kimberly Nivon, Angela Avina Garcia, Abishek Neralla, Tolby Lam
+* Student ID: 916563133(Kimberly), 917579109(Angela), 917725840(Abishek) 
+*		920787020(Tolby)
+* Project: File System Project
 *
-* File: fsShell.c
+* File: fsshell.c
 *
-* Description: Main driver for file system assignment.
-*
-* Make sure to set the #defined on the CMDxxxx_ON from 0 to 1 
-* when you are ready to test that feature
+* Description: main driver for filesystem.
 *
 **************************************************************/
 
