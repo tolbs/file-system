@@ -36,10 +36,14 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
+
+/**
+ * Our volume is actually an array- explanation is in writeup
+ **/
 void createFileSystem()
 {
 	int i;
-	for(i = 0; i < 8192; i++)
+	for(i = 0; i < 10000; i++)
 	{
 		bVector.array[i] = 0;
 	}
@@ -348,7 +352,7 @@ int writeFile(char *fileName, char *data)
 		return -1;
 	}
 	int i;
-	int foundFile = 1; //1 is bad
+	int foundFile = 1; //1 is bad, not open
 	int procTableIndex;
 	for(i = 0; i < procTable.numOpen; i++)
 	{
