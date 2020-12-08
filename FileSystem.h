@@ -1,3 +1,16 @@
+/**************************************************************
+* Class:  CSC-415-03 Fall 2020
+* Name: (KAAT) Kimberly Nivon, Angela Avina Garcia, Abishek Neralla, Tolby Lam
+* Student ID: 916563133(Kimberly), 917579109(Angela), 917725840(Abishek) 
+*		920787020(Tolby)
+* Project: File System Project
+*
+* File: FileSystem.h
+*
+* Description: header for fileSystem.c
+*
+**************************************************************/
+
 #define DIR_SIZE 10
 
 #include <stdio.h>
