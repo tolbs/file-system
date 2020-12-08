@@ -30,8 +30,3 @@ METADATA createFileDesc(char *fileName, short fileSize, int fileMode, char *owne
 METADATA createFileData(char *data, int size);
 METADATA createFileIndex();
 unsigned long hash(const char *s);
-
-
-
-
-#endif

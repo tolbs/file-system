@@ -71,5 +71,3 @@ typedef struct PROCFILETABLE
  	int canWrite[DIR_SIZE]; //WILL BE 1 FOR WRITE PRIVILEDGES
  	long numOpen;
 } PROCFILETABLE;
-
-#endif

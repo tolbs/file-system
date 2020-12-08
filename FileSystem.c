@@ -760,7 +760,7 @@ void getFileInfo(INODE *dirEnt)
 	printf("File Size: %d\n", dirEnt->fileContent.fileSize);
 	printf("Access Mode: %d\n", dirEnt->fileContent.fileMode);
 	printf("Owner: %s\n", dirEnt->fileContent.owner);
-	printf("Creation Time: %ld\n", dirEnt->fileContent.creationTime);
+	//printf("Creation Time: %ld\n", dirEnt->fileContent.creationTime);
 	printf("Index of file descriptor in memory: %ld\n", dirEnt->indexOfFile);
 	printf("Index of first iNode/Data: %ld\n", dirEnt->fileContent.indexOfNode);
 }
