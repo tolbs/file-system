@@ -1,12 +1,13 @@
 /**************************************************************
-* Class:  CSC-415-02 Summer 2020
-* Name: Team Penta - Duy Nguyen, Taylor Artunian, Wameedh Mohammed Ali
-* Student ID: 917446249 (Duy), 920351715 (Taylor), 920678405 (Wameedh)
-* Project: Basic File System - PentaFS
+* Class:  CSC-415-03 Fall 2020 
+* Name: (KAAT) Kimberly Nivon, Angela Avina Garcia, Abishek Neralla, Tolby Lam
+* Student ID: 916563133(Kimberly), 917579109(Angela), 917725840(Abishek) 
+*		920787020(Tolby)
+* Project: File System Project
 *
 * File: mfs.c
 *
-* Description: This file defines the methods to initialize, keep track of, and change our file system's inodes.
+* Description: keeps track of inodes of the file system
 *
 **************************************************************/
 
