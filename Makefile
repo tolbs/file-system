@@ -1,14 +1,16 @@
 <<<<<<< HEAD
-#**************************************************************
-# Class: CSC-415
-# Name: Team Penta - Duy Nguyen, Taylor Artunian, Wameedh Mohammed Ali
-# Student ID: 917446249 (Duy), 920351715 (Taylor), 920678405 (Wameedh)
-# Project: Basic File System - PentaFS
-#
-# File: Makefile
-#
-# Description: contain comands that run Penta File System
-#
+#/**************************************************************
+#* Class:  CSC-415-03 Fall 2020
+#* Name: (KAAT) Kimberly Nivon, Angela Avina Garcia, 
+#*		Abishek Neralla, Tolby Lam
+#* Student ID: 916563133(Kimberly), 917579109(Angela),
+#*		 917725840(Abishek), 920787020(Tolby)
+#* Project: File System Project
+#*
+#* File: Makefile
+#*
+#* Description: runs KAAT filesystem
+#*
 #**************************************************************/
 
 
