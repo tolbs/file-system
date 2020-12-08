@@ -1,5 +1,6 @@
-/*holds all the structs used in KAAT FS*/
-
+/**
+ * holds all the structs used in KAAT FS
+ **/
 
 typedef struct FILEDESC
 {

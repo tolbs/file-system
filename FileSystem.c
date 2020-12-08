@@ -7,6 +7,7 @@ BITVECTOR bVector;
 SYSFILETABLE systemTable;
 PROCFILETABLE procTable;
 
+
 int main(int argc, char const *argv[])
 {
 	createFileSystem();
@@ -55,6 +56,107 @@ void createFileSystem()
 		bVector.array[i] = 0;
 	}
 }
+
+
+//
+// Start Partition System
+//
+// This is the first function to call before your filesystem starts
+// If the filename already exists, then the input values stored in 
+// volSize and blockSize are ignored.  If the file does not exist, it will 
+// be created to the specified volume size in units of the block size
+// (must be power of 2) plus one for the partition header.
+//
+// On return 
+// 		return value 0 = success;
+//		return value -1 = file exists but can not open for write
+//		return value -2 = insufficient space for the volume		
+//		volSize will be filled with the volume size
+//		blockSize will be filled with the block size
+
+/*
+int startPartitionSystem (char * filename, uint64_t * volSize, uint64_t * blockSize)
+	{
+	int fd;
+	int retVal = PART_NOERROR;
+	int accessRet = access(filename, F_OK);
+	printf ("File %s does %sexist, errno = %d\n", filename, accessRet==-1?"not ":"",errno);
+	
+	accessRet = access(filename, R_OK | W_OK);
+	printf ("File %s %sgood to go, errno = %d\n", filename, accessRet==-1?"not ":"",errno);
+	
+	//Some issue - 
+	if (accessRet == -1)
+		{
+		if (errno == ENOENT)  //The volume file does not exist, initialize it
+			{
+			//File does not exist, create it and initialize
+			fd = open(filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+			if (fd == -1)
+				{
+				//Error
+				return -1;
+				}
+				
+			//insure that blocksize is a power of 2 (min 512);
+			uint64_t blksz = *blockSize;
+			printf("Block size is : %llu\n", (ull_t)blksz);
+			if (blksz < MINBLOCKSIZE) //too small 
+				blksz = MINBLOCKSIZE;
+			
+			// example 1000 0111 anded = 0 1010 1001 = 1000 when anded i.e. not power of 2	
+			if ((blksz & (blksz - 1)) != 0) //not a power of 2
+				{
+				printf("%llu is not a power of 2\n", (ull_t)blksz);
+				
+				blksz = 1 << (uint64_t)(ceil(log2(blksz)));
+				printf("Block size is now: %llu\n", (ull_t)blksz);
+				*blockSize = blksz;
+				} 
+			// insure the volume size is a multiple of blockSize
+			uint64_t blockCount = *volSize / blksz;
+			*volSize = blockCount * blksz;
+				
+			int initRet = initializePartition (fd, *volSize, *blockSize);
+			close (fd);
+			}
+		else
+			{
+			// Exists but can not read/write
+			printf ("About to abort - problem opening file.  Error No: %d\n", errno);
+			return -1; 
+			}
+		}
+	
+	// If there is no access issue or we fall through the if it is because we
+	// have initialized the volume file already
+	fd = open(filename, O_RDWR);
+	partitionInfo_p buf = malloc (MINBLOCKSIZE);
+	uint64_t readCount = read (fd, buf, MINBLOCKSIZE);
+	if ((buf->signature == PART_SIGNATURE) && (buf->signature2 == PART_SIGNATURE2))
+		{
+		*volSize = buf->volumesize;
+		*blockSize = buf->blocksize;
+		partInfop = malloc (sizeof(partitionInfo_t)+strlen(buf->volumeName)+4);
+		memcpy(partInfop, buf, sizeof(partitionInfo_t)+strlen(buf->volumeName)+4);
+		partInfop->filename = malloc (strlen(filename)+4);
+		strcpy(partInfop->filename, filename);
+		partInfop->fd = fd;
+		retVal = PART_NOERROR;
+		}
+	else
+		{
+		*volSize = 0;
+		*blockSize = 0;
+		retVal = PART_ERR_INVALID;
+		}
+		
+	free (buf);
+	if (retVal != PART_NOERROR)
+		close (fd);
+	return retVal;
+	}
+*/
 
 void createFile(char *fileName, short fileSize, int fileMode, char *owner, char *data)
 {
@@ -403,6 +505,9 @@ int writeFile(char *fileName, char *data)
 	return 1;
 }
 
+/**
+ * Free-Space Management Stuff
+ **/
 void replaceSmallerCurrent(long fdIndex, long memIndex, char *data, int numDataNew, int numDataCurrent)
 {
 	if(storageBlocks[memIndex].type == 2)
@@ -671,6 +776,9 @@ void replaceSameSize(long memIndex, char *data, int numData)
 	}
 }
 
+/**
+ * Finds the file in the process table and returns its index
+ **/
 long findInProcTable(char *fileName)
 {
 	int i;
@@ -689,6 +797,9 @@ long findInProcTable(char *fileName)
 	return -1;
 }
 
+/**
+ * Finds file in the system table and returns its index
+ **/
 long findInSystemTable(char *fileName)
 {
 	int i;
@@ -759,7 +870,6 @@ void freeBitVector(long index)
 	//printf("Freed bitVector for memory position: %d\n", byteIndex + offset);
 }
 
-
 void getDirectoryInfo()
 {
 	long i;
@@ -813,7 +923,6 @@ long findFreeIndex()
 	}
 	return -1;
 }
-
 
 //found hash function online...
 unsigned long hash(const char *s)
