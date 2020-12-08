@@ -43,7 +43,7 @@ ADDOBJ= fsLow.o b_io.o bitMap.o mfs.o fsMakeVol.o
 #
 
 
-ROOTNAME=FileSystem.c
+ROOTNAME=FileSystem
 HW=
 FOPTION=
 RUNOPTIONS=SampleVolume 10000000 512
@@ -51,7 +51,7 @@ CC=gcc
 CFLAGS= -g -I.
 LIBS =pthread
 DEPS = 
-ADDOBJ= FileSystem.o
+ADDOBJ=
 OBJ = $(ROOTNAME)$(HW)$(FOPTION).o $(ADDOBJ)
 >>>>>>> 210e939a66d1a56f10106725c2569187591180ac
 
