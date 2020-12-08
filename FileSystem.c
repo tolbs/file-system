@@ -38,7 +38,10 @@ int main(int argc, char const *argv[])
 
 
 /**
- * Our volume is actually an array- explanation is in writeup
+ * TODO: make compatible with given partition creator
+ * 
+ * Our volume is actually an array for now, so we can work on other functions
+ * until we manage to finish our b_io open/read/write
  **/
 void createFileSystem()
 {
