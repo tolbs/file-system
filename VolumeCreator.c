@@ -1,3 +1,18 @@
+/**************************************************************
+* Class:  CSC-415-03 Fall 2020
+* Name: (KAAT) Kimberly Nivon, Angela Avina Garcia, Abishek Neralla, Tolby Lam
+* Student ID: 916563133(Kimberly), 917579109(Angela), 917725840(Abishek) 
+*		920787020(Tolby)
+* Project: File System Project
+*
+* File: VolumeCreator.c
+*
+* Description: we are creating our volume this is in-memory structure
+* that is also saved to the disk providing needed information in regards
+* to this volume file
+*
+**************************************************************/
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
